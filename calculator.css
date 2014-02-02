@@ -26,32 +26,49 @@ html {
 	margin: 100px auto;
 	padding: 20px 10px 0px;
 	
-	background: rgb(175, 175, 175);
-	//background: linear-gradient(rgb(175, 175, 175), rgb(170, 170, 170));
+	//background: rgb(175, 175, 175);
+	background: linear-gradient(rgb(185, 185, 185), rgb(175, 175, 175));
 	border-radius: 10px;
 	
 }
 
 /* Top portion */
-
+.top {
+	width: 300px;
+	height: 70px;
+	position:relative;
+	top: -20px;
+	left: -10;
+	border-radius: 10px;
+	padding: 10px 10px 0px;
+	background: rgb(223, 223, 223);
+	background: linear-gradient(rgb(223, 223, 223), rgb(185, 185, 185));
+}
 
 /* Inset shadow on the screen to create indent */
-.top .screen {
+.screen {
 	height: 60px;
 	width: 280px;
 	
 	float: right;
 	margin: 0 0 15px 0;
-	padding: 0 10px;
+	padding: 0 30px;
 	
 	background: rgb(236, 254, 201);
-	border-radius: 6px;
-	//box-shadow: 3px 3px 3px 3px rgb(233, 233, 233);
-	
+	border-radius: 9px;
+	//box-shadow: 3px 3px  rgb(233, 233, 233);
+	border-style:solid;
+	border-right-width:2px;
+	border-left-width:3px;
+	border-top-color:rgb(129, 129, 129);
+	border-right-color:rgb(149, 149, 149);
+	border-bottom-color:rgb(240, 240, 240);
+	border-left-color:rgb(149, 149, 149);
+
 	/* Typography */
-	font-size: 17px;
-	line-height: 40px;
-	color: white;
+	font-size: 20px;
+	line-height: 30px;
+	color: black;
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 	text-align: right;
 	letter-spacing: 1px;
@@ -69,20 +86,27 @@ html {
 	font: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-size: 20px;
 
-
 	width: 60px;
 	height: 36px;
 	
 	background: rgb(212,212,212);
 	border-radius: 10px;
-	box-shadow: 2px 2px rgb(119, 119, 119);
-	
+	//box-shadow: 2px 2px rgb(119, 119, 119);
+	border-style:outset;
+	border-right-color:rgb(166, 166, 166);
+	border-right-width:2px;
+	border-left-width:1px;
+	border-top-width:3px;
+	border-bottom-width:3px;
+	border-left-color:rgb(166, 166, 166);
+	border-bottom-color:  rgb(168, 168, 168);
+	border-top-color:rgb(211, 211, 211);
 	margin: 5px 3px 5px 3px;
 	
 	color: rgb(58,58,58);
 	line-height: 36px;
 	text-align: center;
-	
+	line-height:30px;
 
 }
 
@@ -95,7 +119,7 @@ html {
 	top: -46px;
 	vertical-align:bottom;
 	height: 82px;
-	line-height:128px
+	line-height:128px;
 }
 
 
