@@ -1,16 +1,12 @@
-/* Basic reset */
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	
-	/* Better text styling */
+
 	font: 20px Arial, sans-serif;
 }
 
-/* Finally adding some IE9 fallbacks for gradients to finish things up */
 
-/* A nice BG gradient */
 html {
 	height: 100%;
 	background: white;
@@ -65,7 +61,7 @@ html {
 	border-bottom-color:rgb(240, 240, 240);
 	border-left-color:rgb(149, 149, 149);
 
-	/* Typography */
+
 	font-size: 20px;
 	line-height: 30px;
 	color: black;
@@ -77,7 +73,7 @@ html {
 /* Clear floats */
 .keys, .top {overflow: hidden;}
 
-/* Applying same to the keys */
+
 
 .keys span {
 	float: left;
@@ -122,10 +118,3 @@ html {
 	line-height:128px;
 }
 
-
-
-/* Remove right margins from operator keys */
-/* style different type of keys (operators/evaluate/clear) differently */
-
-
-/* Simulating "pressed" effect on active state of the keys by removing the box-shadow and moving the keys down a bit */
