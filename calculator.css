@@ -50,7 +50,7 @@ html {
 	margin: 0 0 15px 0;
 	padding: 0 30px;
 	
-	background: rgb(236, 254, 201);
+	background: rgb(240, 250, 201);
 	border-radius: 9px;
 	//box-shadow: 3px 3px  rgb(233, 233, 233);
 	border-style:solid;
@@ -88,21 +88,25 @@ html {
 	background: rgb(212,212,212);
 	border-radius: 10px;
 	//box-shadow: 2px 2px rgb(119, 119, 119);
-	border-style:outset;
+/*	border-style:solid;
 	border-right-color:rgb(166, 166, 166);
 	border-right-width:2px;
-	border-left-width:1px;
-	border-top-width:3px;
-	border-bottom-width:3px;
+	border-left-width:1px;*/
+	/*border-top-width:3px;*/
+/*	border-bottom-width:3px;
 	border-left-color:rgb(166, 166, 166);
-	border-bottom-color:  rgb(168, 168, 168);
-	border-top-color:rgb(211, 211, 211);
-	margin: 5px 3px 5px 3px;
+	border-bottom-color:  rgb(168, 168, 168);*/
+
+	margin: 4px 3px 4px 3px;
+	box-shadow:0px -2px 2px 1px rgb(106,106, 106) inset,
+	0px 1px 2px 1px rgb(236,236, 236) inset;
 	
+	//box-shadow:0px -2px 2px rgb(106,106, 106) inset;
+	//box-shadow:-5px 0px grey inset;
+
 	color: rgb(58,58,58);
 	line-height: 36px;
 	text-align: center;
-	line-height:30px;
 
 }
 
