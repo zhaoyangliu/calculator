@@ -3,7 +3,7 @@
 	padding: 0;
 	box-sizing: border-box;
 
-	font: 20px Arial, sans-serif;
+	font: 25px Arial, sans-serif;
 }
 
 
@@ -16,26 +16,25 @@ html {
 
 /* Using box shadows to create 3D effects */
 #calculator {
-	width: 300px;
-	height: 380px;
+	width: 420px;
+	height: 500px;
 	
 	margin: 100px auto;
 	padding: 20px 10px 0px;
 	
 	//background: rgb(175, 175, 175);
 	background: linear-gradient(rgb(185, 185, 185), rgb(175, 175, 175));
-	border-radius: 10px;
+
 	
 }
 
 /* Top portion */
 .top {
-	width: 300px;
-	height: 70px;
+	width: 420px;
+	height: 95px;
 	position:relative;
 	top: -20px;
 	left: -10;
-	border-radius: 10px;
 	padding: 10px 10px 0px;
 	background: rgb(223, 223, 223);
 	background: linear-gradient(rgb(223, 223, 223), rgb(185, 185, 185));
@@ -43,29 +42,33 @@ html {
 
 /* Inset shadow on the screen to create indent */
 .screen {
-	height: 60px;
-	width: 280px;
-	
+	height: 75px;
+	width: 376px;
+	position:relative;
+	right: 10px;
 	float: right;
 	margin: 0 0 15px 0;
-	padding: 0 30px;
+	padding: 5px 40px;
 	
 	background: rgb(240, 250, 201);
 	border-radius: 9px;
-	//box-shadow: 3px 3px  rgb(233, 233, 233);
-	border-style:solid;
-	border-right-width:2px;
-	border-left-width:3px;
+	box-shadow: 4px 0 4px rgb(170,170,170),
+            -4px 0 4px rgb(170,170,170),
+            0 -2px 1px 2px  #7E7E7E,
+            0 6px 5px rgb(240,240,240);
+
+
 	border-top-color:rgb(129, 129, 129);
 	border-right-color:rgb(149, 149, 149);
 	border-bottom-color:rgb(240, 240, 240);
 	border-left-color:rgb(149, 149, 149);
 
 
-	font-size: 20px;
+	font-size: 26px;
+	font-family: "Lucida Sans Regular", "Lucida Sans Unicode", "Lucida Sans";
 	line-height: 30px;
 	color: black;
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+	//text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 	text-align: right;
 	letter-spacing: 1px;
 }
@@ -76,49 +79,45 @@ html {
 
 
 .keys span {
+
+
 	float: left;
 	position: relative;
 	top: 0;
-	font: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	font-size: 20px;
+	font-family: "Lucida Console", "Lucida Sans Typewriter", Monaco, "Bitstream Vera Sans Mono", monospace;
+	font-size: 110%;
 
-	width: 60px;
-	height: 36px;
-	
-	background: rgb(212,212,212);
+	width: 93px;
+	height: 53px;
+	margin: 5px 3px 5px 3px;
+
 	border-radius: 10px;
-	//box-shadow: 2px 2px rgb(119, 119, 119);
-/*	border-style:solid;
-	border-right-color:rgb(166, 166, 166);
-	border-right-width:2px;
-	border-left-width:1px;*/
-	/*border-top-width:3px;*/
-/*	border-bottom-width:3px;
-	border-left-color:rgb(166, 166, 166);
-	border-bottom-color:  rgb(168, 168, 168);*/
-
-	margin: 4px 3px 4px 3px;
-	box-shadow:0px -2px 2px 1px rgb(106,106, 106) inset,
-	0px 1px 2px 1px rgb(236,236, 236) inset;
 	
-	//box-shadow:0px -2px 2px rgb(106,106, 106) inset;
-	//box-shadow:-5px 0px grey inset;
+	border-top:1px rgb(100,100,100) solid;
+	
+
+	background: rgb(212,212,212);
+	background:-webkit-gradient(linear, 0 0, 0 18%, from(white), to(rgb(212,212,212)));
+	
+	box-shadow: inset 1px 0 0   rgb(100,100,100),
+            inset -1px 0 0  rgb(100,100,100), 
+			inset 0 -2px 6px  rgb(58,58,58);			
 
 	color: rgb(58,58,58);
-	line-height: 36px;
+	line-height: 55px;
 	text-align: center;
 
 }
 
 .keys .zero {
-	width: 126px;
+	width: 192px;
 }
 
 .keys .equal {
 	position:relative;
-	top: -46px;
+	top: -63px;
 	vertical-align:bottom;
-	height: 82px;
-	line-height:128px;
+	height: 116px;
+	line-height:175px;
 }
 
