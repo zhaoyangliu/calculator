@@ -47,8 +47,25 @@ function changeNegative(num) {
 
 $(function(){
 	var lastInput = "";
-	var lastNum = 0;
-	var lastBit = 0;
+	var lastNum = "";
+	var lastBit = "";
+	var lastEqual = 0;
+	var throwError = 0;
+
+	function reset(resetContent){
+		if (resetContent == undefined) {
+			$(".screen").text("0");
+			lastNum = "";
+		}
+		else {
+			$(".screen").text(resetContent);
+		}
+		lastInput = "";
+		lastBit = "";
+		lastEqual = 0;
+		throwError = 0;
+	}
+
 	$("#calculator span").click(function(){
 
 		var content = $(this).text();
@@ -59,14 +76,43 @@ $(function(){
 
 		var operators = ["+", "-", "/", "*"];
 		var notShow = ["MC", "M+", "M-", "MR"]
+
+		if (throwError) {
+			reset();
+		}
+		
+		if ($(".screen").text().length > 15) {
+			alert("Too long input");
+			throwError = 1;
+			content = ""
+		}
+
+		var tokens = $(".screen").text().split(" ");
+		var tmp = tokens.pop();
+		if (tmp != "" && tmp!=undefined)
+			tokens.push(tmp)
+
+		if (lastEqual){
+			if (!isNaN(parseInt(content)))
+				reset();
+			else if (operators.indexOf(content) != -1 )
+				reset(lastNum)
+			if (content == "=") {
+				if (tokens.length == 2)
+					reset(lastNum);
+				else {
+					tokens.pop()
+					var tmpNum = tokens.pop()
+					reset(lastNum + " " + tokens.pop() + " " + tmpNum)
+				}
+			}
+
+		}
 		var tokens = $(".screen").text().split(" ");
 
 		if (operators.indexOf(content) != -1) {
 			var tmp = tokens.pop();
-			if (tmp == " ")
-				tmp = tokens.pop();
 			if (operators.indexOf(tmp) == -1) {
-
 				tokens.push(tmp);
 			}
 			tokens.push(content);
@@ -76,15 +122,15 @@ $(function(){
 			});
 		}
 
-		if (content == 'C') {
-			$(".screen").text("0");
+		else if (content == 'C') {
+			reset();
 		}
 
 		else if (content == "\xB1") {
 			for (var i = tokens.length - 1; i >= 0; i--) {
-				if (tokens[i] == String(lastNum)) {
-					tokens[i] = changeNegative(String(lastNum))
-					//alert(tokens[i])
+				if (tokens[i] == lastNum) {
+					tokens[i] = changeNegative(lastNum)
+					lastNum = tokens[i];
 				}
 			}	
 			$(".screen").text( function(i, originText) {
@@ -95,20 +141,24 @@ $(function(){
 		else if (content == '=') {
 			try {
 				var val = evaluate(tokens);
-				lastNum = val;
+				lastNum = String(val);				//the negative should be detect "current number".
+				lastEqual = 1;
 				if (tokens.length > 0 ) 
 					throw("Ill-formed expression");
 				$(".screen").html( function(i, originText) {
-					return originText + "<br>" + val;
+					return originText + "<br>" + " " + val;
 				});
 			} catch (err) {
 				$(".screen").html( function(i, originText) {
 					return originText + "<br>" + err;
 				});
+				throwError = 1;
 			}
 		}
 
 		else if ( !isNaN(parseInt(content)) ) {
+
+
 			if (tokens[tokens.length - 1] == "0") {
 				if (content != "0")
 					$(".screen").text(content);
@@ -118,12 +168,17 @@ $(function(){
 				return originText + content;
 				});
 			}
+
+			
+			if (operators.indexOf(tokens[tokens.length - 1]) != -1 ) {
+				lastNum = "";
+			}
 		}
 
 		lastInput = $(this).text();
 		lastBit = parseInt(lastInput)
 		if (!isNaN(lastBit)){
-			lastNum = lastNum * 10 + lastBit;
+			lastNum = lastNum + String(lastBit);
 		}
 
 	});
