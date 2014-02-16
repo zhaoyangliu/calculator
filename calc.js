@@ -14,14 +14,33 @@ function readOperand(tokens){
 	return result;
 }
 
+function changeMinusMinus(tokens){
+	for (var i = 1; i <= tokens.length - 2; i++) {
+		if (tokens[i] == "-" && tokens[i+1].charAt(0) == "-" ) {
+			tokens[i] = "+";
+			tokens[i+1] = changeNegative(tokens[i+1]);
+		}
+	}
+}
+
+function calculatePrecedence(tokens) {
+
+}
+
+
 function evaluate(tokens) {
+
+	changeMinusMinus(tokens)
+	calculatePrecedence(tokens);
+
 	var operators = ["+", "-", "*", "/"];
 
 	// if (tokens.length == 0)
 	// 	throw("Missing operand");
 
-
 	var value = readOperand(tokens);
+	var calEquation = new Array();
+	calEquation.push(value);
 	while (tokens.length > 0) {
 		var operator = tokens.shift();
 		if (operators.indexOf(operator) == -1) {
@@ -29,9 +48,11 @@ function evaluate(tokens) {
 		}
 		if (tokens.length == 0) 
 			throw("Missing operand");
+		calEquation.push(operator);
 		var temp = readOperand(tokens);
-		value = eval(value + operator + temp);
+		calEquation.push(temp)
 	}
+	value = eval(calEquation.join(""));
 	return value;
 }
 
@@ -64,7 +85,19 @@ $(function(){
 		lastBit = "";
 		lastEqual = 0;
 		throwError = 0;
+	};
+
+	function checkLength() {
+		var br_pos = $(".screen").html().indexOf("<br>");
+		if (br_pos >= 15 || (br_pos == -1 && $(".screen").text().length >= 15)) {
+			reset();
+			throwError = 1;
+			$(".screen").html(" " + "<br>" + "Too Long Input!");
+			return 0;
+		}
+		return 1;
 	}
+
 
 	$("#calculator span").click(function(){
 
@@ -81,12 +114,6 @@ $(function(){
 			reset();
 		}
 		
-		if ($(".screen").text().length > 15) {
-			alert("Too long input");
-			throwError = 1;
-			content = ""
-		}
-
 		var tokens = $(".screen").text().split(" ");
 		var tmp = tokens.pop();
 		if (tmp != "" && tmp!=undefined)
@@ -109,6 +136,9 @@ $(function(){
 
 		}
 		var tokens = $(".screen").text().split(" ");
+
+		if (!checkLength())
+			content = ""
 
 		if (operators.indexOf(content) != -1) {
 			var tmp = tokens.pop();
@@ -169,8 +199,9 @@ $(function(){
 				});
 			}
 
-			
-			if (operators.indexOf(tokens[tokens.length - 1]) != -1 ) {
+			if (tokens[tokens.length-1] == "" 
+				&& operators.indexOf(tokens[tokens.length - 2]) != -1 
+				|| operators.indexOf(tokens[tokens.length - 1]) != -1 ){
 				lastNum = "";
 			}
 		}
