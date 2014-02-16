@@ -8,10 +8,13 @@
 
 function readOperand(tokens){
 	num = tokens.shift();
-	result = parseInt(num);
-	if (isNaN(result))
-		throw("Not a number");
-	return result;
+	if (num.indexOf(".") == -1) {
+		result = parseInt(num);
+		if (isNaN(result))
+			throw("Not a number");
+		return result;
+	}
+	return num;
 }
 
 function changeMinusMinus(tokens){
@@ -23,15 +26,9 @@ function changeMinusMinus(tokens){
 	}
 }
 
-function calculatePrecedence(tokens) {
-
-}
-
-
 function evaluate(tokens) {
 
 	changeMinusMinus(tokens)
-	calculatePrecedence(tokens);
 
 	var operators = ["+", "-", "*", "/"];
 
@@ -89,7 +86,7 @@ $(function(){
 
 	function checkLength() {
 		var br_pos = $(".screen").html().indexOf("<br>");
-		if (br_pos >= 15 || (br_pos == -1 && $(".screen").text().length >= 15)) {
+		if (br_pos >= 20 || (br_pos == -1 && $(".screen").text().length >= 20)) {
 			reset();
 			throwError = 1;
 			$(".screen").html(" " + "<br>" + "Too Long Input!");
@@ -115,15 +112,15 @@ $(function(){
 		}
 		
 		var tokens = $(".screen").text().split(" ");
-		var tmp = tokens.pop();
-		if (tmp != "" && tmp!=undefined)
-			tokens.push(tmp)
 
 		if (lastEqual){
 			if (!isNaN(parseInt(content)))
 				reset();
 			else if (operators.indexOf(content) != -1 )
 				reset(lastNum)
+			else if (content == "\xB1") {
+				reset(changeNegative(lastNum))
+			}
 			if (content == "=") {
 				if (tokens.length == 2)
 					reset(lastNum);
@@ -133,9 +130,9 @@ $(function(){
 					reset(lastNum + " " + tokens.pop() + " " + tmpNum)
 				}
 			}
-
+		tokens = $(".screen").text().split(" ");
 		}
-		var tokens = $(".screen").text().split(" ");
+		
 
 		if (!checkLength())
 			content = ""
@@ -148,7 +145,7 @@ $(function(){
 			tokens.push(content);
 
 			$(".screen").text( function(i, originText) {
-				return tokens.join(" ") + " ";
+				return tokens.join(" ") ;
 			});
 		}
 
@@ -193,23 +190,44 @@ $(function(){
 				if (content != "0")
 					$(".screen").text(content);
 			}
+			else if (operators.indexOf(tokens[tokens.length - 1]) != -1) {
+				$(".screen").text( function(i, originText) {
+					return originText + " " + content;
+				});
+			}
 			else {
 				$(".screen").text( function(i, originText) {
-				return originText + content;
+					return originText + content;
 				});
 			}
 
-			if (tokens[tokens.length-1] == "" 
-				&& operators.indexOf(tokens[tokens.length - 2]) != -1 
-				|| operators.indexOf(tokens[tokens.length - 1]) != -1 ){
+			if (operators.indexOf(tokens[tokens.length - 1]) != -1 ){
 				lastNum = "";
 			}
 		}
+
+		else if (content == "."){
+			var last = tokens[tokens.length - 1]
+			if (operators.indexOf(last) != -1) {
+				$(".screen").text( function(i, originText) {
+					return originText + "0.";
+				});
+			}
+			else if (last.indexOf(".") == -1) {
+				$(".screen").text( function(i, originText) {
+					return originText + ".";
+				});
+			}
+		}
+
 
 		lastInput = $(this).text();
 		lastBit = parseInt(lastInput)
 		if (!isNaN(lastBit)){
 			lastNum = lastNum + String(lastBit);
+		}
+		if (lastInput == ".") {
+			lastNum = lastNum + lastInput;
 		}
 
 	});
